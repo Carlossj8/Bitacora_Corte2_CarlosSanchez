@@ -1,4 +1,4 @@
-package com.labrasaviva.la_brasa_viva;
+package com.labrasaviva;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

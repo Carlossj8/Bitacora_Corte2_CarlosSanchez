@@ -1,10 +1,10 @@
-package com.labrasaviva.model.domain;
+package com.labrasaviva.dto.response;
 
+import com.labrasaviva.model.domain.TerminoCoccion;
 import lombok.Data;
 
 @Data
-
-public class ItemPedido {
+public class ItemPedidoResponseDTO {
     private Long id;
     private Long idPlato;
     private String nombrePlato;

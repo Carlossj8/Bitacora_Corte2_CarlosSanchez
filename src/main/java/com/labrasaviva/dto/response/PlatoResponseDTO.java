@@ -1,10 +1,9 @@
-package com.labrasaviva.model.domain;
+package com.labrasaviva.dto.response;
 
 import lombok.Data;
+
 @Data
-
-
-public class Plato {
+public class PlatoResponseDTO {
     private Long id;
     private String nombre;
     private Double precio;

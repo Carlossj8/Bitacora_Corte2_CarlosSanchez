@@ -1,0 +1,97 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="mPCKtAeuxnPDoJlFZWnF">
+    <mxGraphModel dx="1614" dy="927" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1550" pageHeight="1100" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=17;fontColor=#2B2B2B;" value="&lt;b&gt;[Diagrama de Componentes C4 - Nivel 3]&lt;/b&gt;&lt;br&gt;API Backend Spring Boot - La Brasa Viva (General)" vertex="1">
+          <mxGeometry height="40" width="500" x="40" y="25" as="geometry" />
+        </mxCell>
+        <mxCell id="boundary_backend" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#1168BD;strokeWidth=2;dashed=1;verticalAlign=top;align=left;spacingLeft=15;spacingTop=10;fontColor=#1168BD;fontSize=13;" value="&lt;b&gt;Backend Application [Spring Boot Container]&lt;/b&gt;" vertex="1">
+          <mxGeometry height="740" width="1020" x="220" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_spa" parent="1" style="html=1;whiteSpace=wrap;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;rounded=1;shadow=1;arcSize=8;align=center;verticalAlign=top;spacingTop=6;" value="&amp;lt;&amp;lt;Container&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;Single-Page App / Web Client&lt;/b&gt;&lt;hr&gt;&lt;i&gt;App web React/Vue utilizada por comensales, meseros y pantalla de cocina.&lt;/i&gt;" vertex="1">
+          <mxGeometry height="70" width="280" x="580" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_plato_ctrl" parent="1" style="html=1;whiteSpace=wrap;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#000000;rounded=1;shadow=1;arcSize=8;align=center;verticalAlign=top;spacingTop=6;" value="&amp;lt;&amp;lt;Component&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PlatoController&lt;/b&gt;&lt;hr&gt;&lt;i&gt;Endpoints REST (/api/v1/platos) para consulta de carta, creación y disponibilidad.&lt;/i&gt;" vertex="1">
+          <mxGeometry height="100" width="210" x="250" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_mesa_ctrl" parent="1" style="html=1;whiteSpace=wrap;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#000000;rounded=1;shadow=1;arcSize=8;align=center;verticalAlign=top;spacingTop=6;" value="&amp;lt;&amp;lt;Component&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;MesaController&lt;/b&gt;&lt;hr&gt;&lt;i&gt;Endpoints REST (/api/v1/mesas) para estados del salón y apertura/cierre de mesa.&lt;/i&gt;" vertex="1">
+          <mxGeometry height="100" width="210" x="490" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_pedido_ctrl" parent="1" style="html=1;whiteSpace=wrap;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#000000;rounded=1;shadow=1;arcSize=8;align=center;verticalAlign=top;spacingTop=6;" value="&amp;lt;&amp;lt;Component&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PedidoController&lt;/b&gt;&lt;hr&gt;&lt;i&gt;Endpoints REST (/api/v1/pedidos) para registro de comandas, cortes y términos de cocción.&lt;/i&gt;" vertex="1">
+          <mxGeometry height="100" width="220" x="740" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_cuenta_ctrl" parent="1" style="html=1;whiteSpace=wrap;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#000000;rounded=1;shadow=1;arcSize=8;align=center;verticalAlign=top;spacingTop=6;" value="&amp;lt;&amp;lt;Component&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CuentaController&lt;/b&gt;&lt;hr&gt;&lt;i&gt;Endpoints REST (/api/v1/cuentas) para liquidación, pago y balance de mesas.&lt;/i&gt;" vertex="1">
+          <mxGeometry height="90" width="220" x="990" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_plato_srv" parent="1" style="html=1;whiteSpace=wrap;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#000000;rounded=1;shadow=1;arcSize=8;align=center;verticalAlign=top;spacingTop=6;" value="&amp;lt;&amp;lt;Component&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PlatoService&lt;/b&gt;&lt;hr&gt;&lt;i&gt;Gestiona catálogo, activa/desactiva según ingredientes agotados.&lt;/i&gt;" vertex="1">
+          <mxGeometry height="90" width="210" x="250" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_mesa_srv" parent="1" style="html=1;whiteSpace=wrap;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#000000;rounded=1;shadow=1;arcSize=8;align=center;verticalAlign=top;spacingTop=6;" value="&amp;lt;&amp;lt;Component&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;MesaService&lt;/b&gt;&lt;hr&gt;&lt;i&gt;Reglas de asignación, capacidad de salón y unicidad de cuenta abierta .&lt;/i&gt;" vertex="1">
+          <mxGeometry height="90" width="210" x="490" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_pedido_srv" parent="1" style="html=1;whiteSpace=wrap;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#000000;rounded=1;shadow=1;arcSize=8;align=center;verticalAlign=top;spacingTop=6;" value="&amp;lt;&amp;lt;Component&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PedidoService / CocinaService&lt;/b&gt;&lt;hr&gt;&lt;i&gt;Valida término, congela precios (RN-04) y aplica límite de 8 cortes&amp;nbsp;&lt;/i&gt;" vertex="1">
+          <mxGeometry height="90" width="220" x="740" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_cuenta_srv" parent="1" style="html=1;whiteSpace=wrap;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#000000;rounded=1;shadow=1;arcSize=8;align=center;verticalAlign=top;spacingTop=6;" value="&amp;lt;&amp;lt;Component&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CuentaService&lt;/b&gt;&lt;hr&gt;&lt;i&gt;Calcula totales sobre precios congelados, valida cierre y orquesta pagos.&lt;/i&gt;" vertex="1">
+          <mxGeometry height="100" width="220" x="990" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_data_repo" parent="1" style="html=1;whiteSpace=wrap;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#000000;rounded=1;shadow=1;arcSize=8;align=center;verticalAlign=top;spacingTop=6;" value="&amp;lt;&amp;lt;Component&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;Repositories / Data Access&lt;/b&gt;&lt;hr&gt;&lt;i&gt;Spring Data Repositories (Plato, Mesa, Pedido, Cuenta, ItemPedido).&lt;/i&gt;" vertex="1">
+          <mxGeometry height="80" width="470" x="490" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_payment_client" parent="1" style="html=1;whiteSpace=wrap;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#000000;rounded=1;shadow=1;arcSize=8;align=center;verticalAlign=top;spacingTop=6;" value="&amp;lt;&amp;lt;Component&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PaymentGatewayClient&lt;/b&gt;&lt;hr&gt;&lt;i&gt;Cliente HTTP/REST para autorizaciones con pasarela externa&lt;/i&gt;" vertex="1">
+          <mxGeometry height="100" width="200" x="1000" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_notif_client" parent="1" style="html=1;whiteSpace=wrap;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#000000;rounded=1;shadow=1;arcSize=8;align=center;verticalAlign=top;spacingTop=6;" value="&amp;lt;&amp;lt;Component&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;NotificationDispatcher&lt;/b&gt;&lt;hr&gt;&lt;i&gt;Publicador de eventos y WebSockets para cambios de estado de cocina.&lt;/i&gt;" vertex="1">
+          <mxGeometry height="100" width="200" x="750" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="db_sql" parent="1" style="shape=cylinder;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;fillColor=#1168BD;strokeColor=#0B4884;fontColor=#FFFFFF;align=center;verticalAlign=top;spacingTop=10;" value="&amp;lt;&amp;lt;Container&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;Database (PostgreSQL)&lt;/b&gt;&lt;hr&gt;&lt;i&gt;Almacena platos, estados de mesa, ítems de pedido con precios congelados e histórico.&lt;/i&gt;" vertex="1">
+          <mxGeometry height="150" width="230" x="610" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_pasarela" parent="1" style="html=1;whiteSpace=wrap;fillColor=#6C757D;strokeColor=#495057;fontColor=#FFFFFF;rounded=1;shadow=1;arcSize=8;align=center;verticalAlign=top;spacingTop=6;" value="&amp;lt;&amp;lt;External System&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;Pasarela de Pagos&lt;/b&gt;&lt;hr&gt;&lt;i&gt;API externa bancaria.&lt;/i&gt;" vertex="1">
+          <mxGeometry height="70" width="180" x="1290" y="525" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_notif_push" parent="1" style="html=1;whiteSpace=wrap;fillColor=#6C757D;strokeColor=#495057;fontColor=#FFFFFF;rounded=1;shadow=1;arcSize=8;align=center;verticalAlign=top;spacingTop=6;" value="&amp;lt;&amp;lt;External System&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;Servicio Push / Notif&lt;/b&gt;&lt;hr&gt;&lt;i&gt;Broker de mensajería.&lt;/i&gt;" vertex="1">
+          <mxGeometry height="70" width="180" x="1290" y="665" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_spa_ctrls" edge="1" parent="1" source="actor_spa" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#495057;strokeWidth=2;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="comp_pedido_ctrl" value="Peticiones REST [JSON/HTTPS]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_c1_s1" edge="1" parent="1" source="comp_plato_ctrl" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#495057;strokeWidth=1.5;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="comp_plato_srv" value="Usa">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_c2_s2" edge="1" parent="1" source="comp_mesa_ctrl" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#495057;strokeWidth=1.5;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="comp_mesa_srv" value="Usa">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_c3_s3" edge="1" parent="1" source="comp_pedido_ctrl" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#495057;strokeWidth=1.5;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="comp_pedido_srv" value="Usa">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_c4_s4" edge="1" parent="1" source="comp_cuenta_ctrl" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#495057;strokeWidth=1.5;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="comp_cuenta_srv" value="Usa">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_s_repo" edge="1" parent="1" source="comp_pedido_srv" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#495057;strokeWidth=1.5;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="comp_data_repo" value="Persistencia y consultas [Java Calls]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_s4_repo" edge="1" parent="1" source="comp_cuenta_srv" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#495057;strokeWidth=1.5;fontSize=10;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.9;entryY=0;entryDx=0;entryDy=0;" target="comp_data_repo" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_s4_payclient" edge="1" parent="1" source="comp_cuenta_srv" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#495057;strokeWidth=1.5;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="comp_payment_client" value="Procesa cobro">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_pay_ext" edge="1" parent="1" source="comp_payment_client" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#495057;strokeWidth=2;fontSize=10;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="ext_pasarela" value="HTTPS/REST">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_ped_notif" edge="1" parent="1" source="comp_pedido_srv" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#495057;strokeWidth=1.5;fontSize=10;exitX=0.8;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="comp_notif_client" value="Dispara evento de cambio de estado">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_notif_ext" edge="1" parent="1" source="comp_notif_client" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#495057;strokeWidth=2;fontSize=10;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="ext_notif_push" value="Push/Event">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_repo_db" edge="1" parent="1" source="comp_data_repo" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#1168BD;strokeWidth=2;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="db_sql" value="Lee y escribe [JDBC / SQL / Port 5432]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

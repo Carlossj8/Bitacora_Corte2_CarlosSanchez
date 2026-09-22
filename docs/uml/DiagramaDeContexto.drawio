@@ -1,0 +1,60 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="0TR1ula5URb3AadtZyI-">
+    <mxGraphModel dx="1372" dy="788" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1350" pageHeight="950" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;fontColor=#2B2B2B;" value="&lt;br&gt;Sistema de Gestión de Restaurante - La Brasa Viva" vertex="1">
+          <mxGeometry height="60" width="440" x="50" y="25" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_cliente" parent="1" style="html=1;whiteSpace=wrap;fillColor=#08427B;strokeColor=#052d54;fontColor=#FFFFFF;rounded=1;shadow=1;arcSize=10;align=center;verticalAlign=top;spacingTop=8;" value="&amp;lt;&amp;lt;Person&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;Cliente (Comensal)&lt;/b&gt;&lt;hr&gt;&lt;i&gt;Consulta la carta digital desde la mesa, configura su corte de carne con término de cocción y sigue el estado de su orden.&lt;/i&gt;" vertex="1">
+          <mxGeometry height="120" width="220" x="60" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_mesero" parent="1" style="html=1;whiteSpace=wrap;fillColor=#08427B;strokeColor=#052d54;fontColor=#FFFFFF;rounded=1;shadow=1;arcSize=10;align=center;verticalAlign=top;spacingTop=8;" value="&amp;lt;&amp;lt;Person&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;Mesero&lt;/b&gt;&lt;hr&gt;&lt;i&gt;Abre mesas, toma y modifica comandas en sala, envía órdenes a la parrilla y procesa el cierre de cuenta.&lt;/i&gt;" vertex="1">
+          <mxGeometry height="120" width="220" x="360" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_cocina" parent="1" style="html=1;whiteSpace=wrap;fillColor=#08427B;strokeColor=#052d54;fontColor=#FFFFFF;rounded=1;shadow=1;arcSize=10;align=center;verticalAlign=top;spacingTop=8;" value="&amp;lt;&amp;lt;Person&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;Parrillero / Cocina&lt;/b&gt;&lt;hr&gt;&lt;i&gt;Monitorea el tablero de comandas en tiempo real, controla el tope de 8 cortes y avanza la preparación de pedidos.&lt;/i&gt;" vertex="1">
+          <mxGeometry height="120" width="220" x="660" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_admin" parent="1" style="html=1;whiteSpace=wrap;fillColor=#08427B;strokeColor=#052d54;fontColor=#FFFFFF;rounded=1;shadow=1;arcSize=10;align=center;verticalAlign=top;spacingTop=8;" value="&amp;lt;&amp;lt;Person&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;Administrador&lt;/b&gt;&lt;hr&gt;&lt;i&gt;Gestiona el catálogo de platos, marcas de disponibilidad de ingredientes, usuarios del personal y consulta reportes.&lt;/i&gt;" vertex="1">
+          <mxGeometry height="120" width="220" x="960" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="system_labrasaviva" parent="1" style="html=1;whiteSpace=wrap;fillColor=#1168BD;strokeColor=#0B4884;fontColor=#FFFFFF;rounded=1;shadow=1;arcSize=8;align=center;verticalAlign=top;spacingTop=12;" value="&amp;lt;&amp;lt;Software System&amp;gt;&amp;gt;&lt;br&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;La Brasa Viva&lt;/b&gt;&lt;hr&gt;&lt;p style=&quot;margin: 8px 12px; font-size: 13px;&quot;&gt;Plataforma web integral que digitaliza el ciclo de servicio: disponibilidad de carta en tiempo real, armado y validación de cortes con término de cocción, orquestación del tablero de parrilla, gestión de cuentas de mesa y reportería consolidada.&lt;/p&gt;" vertex="1">
+          <mxGeometry height="140" width="480" x="380" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_pagos" parent="1" style="html=1;whiteSpace=wrap;fillColor=#6C757D;strokeColor=#495057;fontColor=#FFFFFF;rounded=1;shadow=1;arcSize=10;align=center;verticalAlign=top;spacingTop=8;" value="&amp;lt;&amp;lt;External Software System&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;Pasarela de Pagos&lt;/b&gt;&lt;hr&gt;&lt;i&gt;Servicio de procesamiento externo que autoriza y liquida transacciones con tarjetas bancarias&lt;/i&gt;" vertex="1">
+          <mxGeometry height="110" width="250" x="120" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_facturacion" parent="1" style="html=1;whiteSpace=wrap;fillColor=#6C757D;strokeColor=#495057;fontColor=#FFFFFF;rounded=1;shadow=1;arcSize=10;align=center;verticalAlign=top;spacingTop=8;" value="&amp;lt;&amp;lt;External Software System&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;Facturación Electrónica&lt;/b&gt;&lt;hr&gt;&lt;i&gt;Proveedor tecnológico y de validación tributaria para la emisión y timbrado legal de facturas&lt;/i&gt;" vertex="1">
+          <mxGeometry height="110" width="250" x="495" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_notificaciones" parent="1" style="html=1;whiteSpace=wrap;fillColor=#6C757D;strokeColor=#495057;fontColor=#FFFFFF;rounded=1;shadow=1;arcSize=10;align=center;verticalAlign=top;spacingTop=8;" value="&amp;lt;&amp;lt;External Software System&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;Servicio de Notificaciones&lt;/b&gt;&lt;hr&gt;&lt;i&gt;Infraestructura de mensajería (Push / WebSockets) para alertas en tiempo real al comensal (pedido recibido / listo).&lt;/i&gt;" vertex="1">
+          <mxGeometry height="110" width="250" x="870" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_cliente" edge="1" parent="1" source="actor_cliente" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#495057;strokeWidth=2;fontColor=#333333;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.15;entryY=0;entryDx=0;entryDy=0;" target="system_labrasaviva" value="Consulta carta, arma pedido&lt;br&gt;y monitorea cocción&lt;div&gt;&lt;br/&gt;&lt;/div&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_mesero" edge="1" parent="1" source="actor_mesero" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#495057;strokeWidth=2;fontColor=#333333;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.38;entryY=0;entryDx=0;entryDy=0;" target="system_labrasaviva" value="Abre mesa, registra/edita&lt;br&gt;órdenes y cierra cuenta&lt;div&gt;&lt;br/&gt;&lt;/div&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_cocina" edge="1" parent="1" source="actor_cocina" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#495057;strokeWidth=2;fontColor=#333333;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.65;entryY=0;entryDx=0;entryDy=0;" target="system_labrasaviva" value="Consulta comandas,&lt;br&gt;avanza estados y reporta insumos&lt;div&gt;&lt;br/&gt;&lt;/div&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_admin" edge="1" parent="1" source="actor_admin" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#495057;strokeWidth=2;fontColor=#333333;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.88;entryY=0;entryDx=0;entryDy=0;" target="system_labrasaviva" value="Administra carta, usuarios&lt;br&gt;y consulta reportes&lt;div&gt;&lt;br/&gt;&lt;/div&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_pagos" edge="1" parent="1" source="system_labrasaviva" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#495057;strokeWidth=2;fontColor=#333333;fontSize=11;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="ext_pagos" value="Solicita autorización&lt;br&gt;de transacciones con tarjeta&lt;div&gt;&lt;br/&gt;&lt;/div&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_facturacion" edge="1" parent="1" source="system_labrasaviva" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#495057;strokeWidth=2;fontColor=#333333;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="ext_facturacion" value="Transmite datos de venta&lt;br&gt;para timbrado electrónico&lt;div&gt;&lt;br/&gt;&lt;/div&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_notificaciones" edge="1" parent="1" source="system_labrasaviva" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#495057;strokeWidth=2;fontColor=#333333;fontSize=11;exitX=0.8;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="ext_notificaciones" value="Despacha eventos de&lt;br&gt;preparación y entrega de plato&lt;div&gt;&lt;br/&gt;&lt;/div&gt;">
+          <mxGeometry relative="1" x="0.0026" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
