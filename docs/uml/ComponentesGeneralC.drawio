@@ -1,0 +1,106 @@
+<mxGraphModel dx="1614" dy="927" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" background="#FFFFFF" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+    <mxCell id="title_gen" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#2B2B2B;" value="&lt;b style=&quot;font-size: 16px;&quot;&gt;DIAGRAMA DE COMPONENTES GENERAL — LA BRASA VIVA&lt;/b&gt;&lt;br&gt;Arquitectura global del sistema, límites de dominio y dependencias externas" vertex="1">
+      <mxGeometry height="40" width="600" x="40" y="20" as="geometry" />
+    </mxCell>
+    <mxCell id="box_sistema" parent="1" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=200;tabHeight=30;tabPosition=left;html=1;boundedLbl=1;fillColor=#F8F9FA;strokeColor=#004085;strokeWidth=2;dashed=0;verticalAlign=top;align=left;spacingLeft=15;" value="Sistema La Brasa Viva (Backend)" vertex="1">
+      <mxGeometry height="740" width="970" x="250" y="80" as="geometry" />
+    </mxCell>
+    <mxCell id="sub_carta" parent="1" style="shape=folder;fontStyle=1;tabWidth=180;tabHeight=25;tabPosition=left;html=1;boundedLbl=1;fillColor=#EBF5FB;strokeColor=#2980B9;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=10;" value="Dominio: Carta &amp; Disponibilidad" vertex="1">
+      <mxGeometry height="230" width="280" x="280" y="140" as="geometry" />
+    </mxCell>
+    <mxCell id="cmp_carta" parent="1" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1B4F72;strokeWidth=1.5;" value="«component»&lt;br&gt;&lt;b&gt;MenuManagement-Service&lt;/b&gt;" vertex="1">
+      <mxGeometry height="80" width="200" x="320" y="210" as="geometry" />
+    </mxCell>
+    <mxCell id="sub_cocina" parent="1" style="shape=folder;fontStyle=1;tabWidth=170;tabHeight=25;tabPosition=left;html=1;boundedLbl=1;fillColor=#EBF5FB;strokeColor=#2980B9;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=10;" value="Dominio: Cocina &amp; Parrilla" vertex="1">
+      <mxGeometry height="230" width="580" x="600" y="140" as="geometry" />
+    </mxCell>
+    <mxCell id="cmp_ordenes" parent="1" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1B4F72;strokeWidth=1.5;" value="«component»&lt;br&gt;&lt;b&gt;OrderProcessing-Service&lt;/b&gt;" vertex="1">
+      <mxGeometry height="80" width="220" x="630" y="210" as="geometry" />
+    </mxCell>
+    <mxCell id="cmp_parrilla" parent="1" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1B4F72;strokeWidth=1.5;" value="«component»&lt;br&gt;&lt;b&gt;KitchenDisplay-Engine&lt;/b&gt;" vertex="1">
+      <mxGeometry height="80" width="220" x="920" y="210" as="geometry" />
+    </mxCell>
+    <mxCell id="sub_pagos" parent="1" style="shape=folder;fontStyle=1;tabWidth=180;tabHeight=25;tabPosition=left;html=1;boundedLbl=1;fillColor=#EBF5FB;strokeColor=#2980B9;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=10;" value="Dominio: Salón &amp; Facturación" vertex="1">
+      <mxGeometry height="220" width="900" x="280" y="440" as="geometry" />
+    </mxCell>
+    <mxCell id="cmp_mesas" parent="1" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1B4F72;strokeWidth=1.5;" value="«component»&lt;br&gt;&lt;b&gt;TableBilling-Service&lt;/b&gt;" vertex="1">
+      <mxGeometry height="80" width="220" x="340" y="520" as="geometry" />
+    </mxCell>
+    <mxCell id="cmp_adapter_pago" parent="1" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1B4F72;strokeWidth=1.5;" value="«component»&lt;br&gt;&lt;b&gt;PaymentAdapter&lt;/b&gt;" vertex="1">
+      <mxGeometry height="80" width="200" x="640" y="520" as="geometry" />
+    </mxCell>
+    <mxCell id="cmp_adapter_factura" parent="1" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1B4F72;strokeWidth=1.5;" value="«component»&lt;br&gt;&lt;b&gt;ElectronicInvoiceAdapter&lt;/b&gt;" vertex="1">
+      <mxGeometry height="80" width="220" x="920" y="520" as="geometry" />
+    </mxCell>
+    <mxCell id="cmp_frontend" parent="1" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;fillColor=#E2E3E5;strokeColor=#383D41;strokeWidth=1.5;" value="«component»&lt;br&gt;&lt;b&gt;SinglePageApplication&lt;/b&gt;&lt;br&gt;(Web / Tablets)" vertex="1">
+      <mxGeometry height="80" width="160" x="50" y="210" as="geometry" />
+    </mxCell>
+    <mxCell id="cmp_ext_pago" parent="1" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;fillColor=#E2E3E5;strokeColor=#383D41;strokeWidth=1.5;" value="«external system»&lt;br&gt;&lt;b&gt;Pasarela de Pagos&lt;/b&gt;&lt;br&gt;(API Bancaria)" vertex="1">
+      <mxGeometry height="80" width="180" x="1280" y="470" as="geometry" />
+    </mxCell>
+    <mxCell id="cmp_ext_factura" parent="1" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;fillColor=#E2E3E5;strokeColor=#383D41;strokeWidth=1.5;" value="«external system»&lt;br&gt;&lt;b&gt;Facturación Electrónica&lt;/b&gt;&lt;br&gt;(Servicio DIAN)" vertex="1">
+      <mxGeometry height="80" width="180" x="1280" y="580" as="geometry" />
+    </mxCell>
+    <mxCell id="cmp_ext_notif" parent="1" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;fillColor=#E2E3E5;strokeColor=#383D41;strokeWidth=1.5;" value="«external system»&lt;br&gt;&lt;b&gt;Servicio Notificaciones&lt;/b&gt;&lt;br&gt;(Push / SMS)" vertex="1">
+      <mxGeometry height="80" width="180" x="1280" y="210" as="geometry" />
+    </mxCell>
+    <mxCell id="db_general" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#FFF2CC;strokeColor=#D6B656;strokeWidth=1.5;" value="&lt;b&gt;Database&lt;/b&gt;&lt;br&gt;(PostgreSQL)" vertex="1">
+      <mxGeometry height="110" width="130" x="690" y="870" as="geometry" />
+    </mxCell>
+    <mxCell id="port_front_in" parent="1" style="whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#004085;" value="" vertex="1">
+      <mxGeometry height="10" width="10" x="245" y="245" as="geometry" />
+    </mxCell>
+    <mxCell id="port_pago_out" parent="1" style="whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#004085;" value="" vertex="1">
+      <mxGeometry height="10" width="10" x="1215" y="505" as="geometry" />
+    </mxCell>
+    <mxCell id="port_fact_out" parent="1" style="whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#004085;" value="" vertex="1">
+      <mxGeometry height="10" width="10" x="1215" y="615" as="geometry" />
+    </mxCell>
+    <mxCell id="port_notif_out" parent="1" style="whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#004085;" value="" vertex="1">
+      <mxGeometry height="10" width="10" x="1215" y="245" as="geometry" />
+    </mxCell>
+    <mxCell id="if_front_ball" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#004085;strokeWidth=1.5;" value="" vertex="1">
+      <mxGeometry height="16" width="16" x="270" y="242" as="geometry" />
+    </mxCell>
+    <mxCell id="line_front" edge="1" parent="1" source="cmp_frontend" style="endArrow=none;html=1;strokeColor=#004085;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="port_front_in" value="REST/HTTPS">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="line_front_in" edge="1" parent="1" source="port_front_in" style="endArrow=none;html=1;strokeColor=#004085;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="if_front_ball" value="">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="line_ord_kit" edge="1" parent="1" source="cmp_ordenes" style="endArrow=none;html=1;strokeColor=#004085;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="cmp_parrilla" value="Comandas">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="line_mesa_pago" edge="1" parent="1" source="cmp_mesas" style="endArrow=none;html=1;strokeColor=#004085;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="cmp_adapter_pago" value="Monto y Medio">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="line_pago_ext" edge="1" parent="1" source="cmp_adapter_pago" style="endArrow=none;html=1;strokeColor=#004085;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="port_pago_out" value="HTTPS/REST">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="line_pago_out" edge="1" parent="1" source="port_pago_out" style="endArrow=none;html=1;strokeColor=#004085;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="cmp_ext_pago" value="">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="line_fact_ext" edge="1" parent="1" source="cmp_adapter_factura" style="endArrow=none;html=1;strokeColor=#004085;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="port_fact_out" value="SOAP/REST">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="line_fact_out" edge="1" parent="1" source="port_fact_out" style="endArrow=none;html=1;strokeColor=#004085;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="cmp_ext_factura" value="">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="line_notif_ext" edge="1" parent="1" source="cmp_parrilla" style="endArrow=none;html=1;strokeColor=#004085;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="port_notif_out" value="WebHook/Push">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="line_notif_out" edge="1" parent="1" source="port_notif_out" style="endArrow=none;html=1;strokeColor=#004085;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="cmp_ext_notif" value="">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="line_db1" edge="1" parent="1" source="cmp_mesas" style="endArrow=none;html=1;strokeColor=#7F8C8D;strokeWidth=1.5;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.2;entryY=0;entryDx=0;entryDy=0;" target="db_general" value="SQL">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="line_db2" edge="1" parent="1" source="cmp_ordenes" style="endArrow=none;html=1;strokeColor=#7F8C8D;strokeWidth=1.5;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="db_general" value="SQL">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+  </root>
+</mxGraphModel>
+

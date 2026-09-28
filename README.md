@@ -9,10 +9,10 @@ Plataforma de gestion y API REST para restaurante tipo parrilla.
 ![Diagrama de Contexto](docs/uml/DiagramaDeContexto.png)
 
 ### Diagrama de Componentes (General)
-![Componentes General](docs/uml/ComponentesGeneralLBB.png)
+![Componentes General](docs/uml/ComponentesGeneralC.png)
 
 ### Diagrama de Componentes (Especifico)
-![Componentes Específico](docs/uml/ComponentesEspecificoLBB.png)
+![Componentes Específico](docs/uml/ComponentesEspecificoC.png)
 
 ---
 
