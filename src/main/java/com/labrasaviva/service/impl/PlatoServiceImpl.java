@@ -2,116 +2,129 @@ package com.labrasaviva.service.impl;
 
 import com.labrasaviva.exception.PlatoNoEncontradoException;
 import com.labrasaviva.exception.PlatoYaExisteException;
+import com.labrasaviva.mapper.persistence.PlatoEntityMapper;
 import com.labrasaviva.model.domain.Plato;
+import com.labrasaviva.model.entity.PlatoEntity;
+import com.labrasaviva.repository.PlatoRepository;
+import com.labrasaviva.service.EventoAuditoriaService;
 import com.labrasaviva.service.PlatoService;
+import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import java.util.Optional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class PlatoServiceImpl implements PlatoService {
 
-    private final List<Plato> platos = new ArrayList<>();
-    private final AtomicLong counter = new AtomicLong(1);
+    private final PlatoRepository platoRepository;
+    private final PlatoEntityMapper platoMapper;
+    private final EventoAuditoriaService eventoAuditoriaService;
 
-    public PlatoServiceImpl() {
-        // Inicializando datos de prueba
-        Plato p1 = new Plato();
-        p1.setId(counter.getAndIncrement());
-        p1.setNombre("Punta de Anca");
-        p1.setPrecio(45000.0);
-        p1.setCategoria("Cortes");
-        p1.setDisponible(true);
-
-        Plato p2 = new Plato();
-        p2.setId(counter.getAndIncrement());
-        p2.setNombre("Pechuga a la Plancha");
-        p2.setPrecio(25000.0);
-        p2.setCategoria("Aves");
-        p2.setDisponible(true);
-
-        Plato p3 = new Plato();
-        p3.setId(counter.getAndIncrement());
-        p3.setNombre("Churrasco Especial");
-        p3.setPrecio(50000.0);
-        p3.setCategoria("Cortes");
-        p3.setDisponible(false); // No disponible por ahora
-
-        platos.add(p1);
-        platos.add(p2);
-        platos.add(p3);
+    @PostConstruct
+    public void inicializarDatos() {
+        if (platoRepository.count() == 0) {
+            platoRepository.save(PlatoEntity.builder().nombre("Punta de Anca").precio(45000.0).categoria("Cortes").disponible(true).build());
+            platoRepository.save(PlatoEntity.builder().nombre("Pechuga a la Plancha").precio(25000.0).categoria("Aves").disponible(true).build());
+            platoRepository.save(PlatoEntity.builder().nombre("Churrasco Especial").precio(50000.0).categoria("Cortes").disponible(false).build());
+            log.info("Datos iniciales de platos precargados en la base de datos relacional.");
+        }
     }
 
     @Override
     public List<Plato> obtenerTodos() {
-        log.info("Consultando todos los platos de la base de datos simulada. Total: {}", platos.size());
-        return platos;
+        return platoRepository.findAll().stream()
+                .map(platoMapper::toDomain)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Plato> obtenerDisponibles() {
-        return platos.stream()
-                .filter(Plato::getDisponible)
+        return platoRepository.findByDisponibleTrue().stream()
+                .map(platoMapper::toDomain)
                 .collect(Collectors.toList());
     }
 
     @Override
     public Plato obtenerPorId(Long id) {
-        return Optional.ofNullable(platos.stream()
-                        .filter(p -> p.getId().equals(id))
-                        .findFirst()
-                        .orElse(null))
+        return platoRepository.findById(id)
+                .map(platoMapper::toDomain)
                 .orElseThrow(() -> new PlatoNoEncontradoException("Plato no encontrado con ID: " + id));
-    }
-
-    private boolean nombreExiste(String nombre) {
-        return platos.stream()
-                .anyMatch(p -> p.getNombre().equalsIgnoreCase(nombre));
     }
 
     @Override
     public Plato crear(Plato plato) {
-        if (nombreExiste(plato.getNombre())) {
+        if (platoRepository.existsByNombreIgnoreCase(plato.getNombre())) {
             throw new PlatoYaExisteException("Ya existe un plato con el nombre: " + plato.getNombre());
         }
-        plato.setId(counter.getAndIncrement());
-        platos.add(plato);
-        log.info("Se ha creado un nuevo plato: {} con ID {}", plato.getNombre(), plato.getId());
-        return plato;
+
+        PlatoEntity entity = platoMapper.toEntity(plato);
+        PlatoEntity guardado = platoRepository.save(entity);
+        log.info("Plato guardado en BD con ID: {}", guardado.getId());
+
+        eventoAuditoriaService.registrarEvento(
+                "PLATO_CREADO",
+                "Plato",
+                guardado.getId(),
+                "Se creó el plato " + guardado.getNombre() + " en el catálogo",
+                "ADMIN",
+                Map.of("precio", guardado.getPrecio(), "categoria", guardado.getCategoria())
+        );
+
+        return platoMapper.toDomain(guardado);
     }
 
     @Override
     public Plato actualizar(Long id, Plato platoActualizado) {
-        Plato plato = obtenerPorId(id); // Lanzará excepción si no existe
-        
-        // Si cambia el nombre, verificar que no colisione con otro
-        if (!plato.getNombre().equalsIgnoreCase(platoActualizado.getNombre()) && nombreExiste(platoActualizado.getNombre())) {
+        PlatoEntity entity = platoRepository.findById(id)
+                .orElseThrow(() -> new PlatoNoEncontradoException("Plato no encontrado con ID: " + id));
+
+        if (platoRepository.existsByNombreIgnoreCaseAndIdNot(platoActualizado.getNombre(), id)) {
             throw new PlatoYaExisteException("Ya existe otro plato con el nombre: " + platoActualizado.getNombre());
         }
 
-        plato.setNombre(platoActualizado.getNombre());
-        plato.setPrecio(platoActualizado.getPrecio());
-        plato.setCategoria(platoActualizado.getCategoria());
-        plato.setDisponible(platoActualizado.getDisponible());
-        return plato;
+        entity.setNombre(platoActualizado.getNombre());
+        entity.setPrecio(platoActualizado.getPrecio());
+        entity.setCategoria(platoActualizado.getCategoria());
+        entity.setDisponible(platoActualizado.getDisponible());
+
+        PlatoEntity guardado = platoRepository.save(entity);
+        return platoMapper.toDomain(guardado);
     }
 
     @Override
     public void eliminar(Long id) {
-        Plato plato = obtenerPorId(id); // Validar existencia
-        platos.remove(plato);
+        if (!platoRepository.existsById(id)) {
+            throw new PlatoNoEncontradoException("Plato no encontrado con ID: " + id);
+        }
+        platoRepository.deleteById(id);
+        log.info("Plato con ID {} eliminado de BD", id);
     }
 
     @Override
     public Plato cambiarDisponibilidad(Long id, Boolean disponible) {
-        Plato plato = obtenerPorId(id); // Lanzará excepción si no existe
-        plato.setDisponible(disponible);
-        return plato;
+        PlatoEntity entity = platoRepository.findById(id)
+                .orElseThrow(() -> new PlatoNoEncontradoException("Plato no encontrado con ID: " + id));
+
+        entity.setDisponible(disponible);
+        PlatoEntity guardado = platoRepository.save(entity);
+
+        if (!disponible) {
+            eventoAuditoriaService.registrarEvento(
+                    "PLATO_AGOTADO",
+                    "Plato",
+                    guardado.getId(),
+                    "El plato " + guardado.getNombre() + " fue marcado como no disponible",
+                    "COCINA",
+                    Map.of("categoria", guardado.getCategoria())
+            );
+        }
+
+        return platoMapper.toDomain(guardado);
     }
 }

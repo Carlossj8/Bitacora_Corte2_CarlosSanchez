@@ -4,69 +4,85 @@ import com.labrasaviva.exception.CuentaNoEncontradaException;
 import com.labrasaviva.exception.MesaOcupadaException;
 import com.labrasaviva.exception.MontoInsuficienteException;
 import com.labrasaviva.exception.PedidosNoEntregadosException;
+import com.labrasaviva.mapper.persistence.CuentaEntityMapper;
 import com.labrasaviva.model.domain.Cuenta;
 import com.labrasaviva.model.domain.EstadoCuenta;
 import com.labrasaviva.model.domain.EstadoPedido;
 import com.labrasaviva.model.domain.MedioPago;
 import com.labrasaviva.model.domain.Pedido;
+import com.labrasaviva.model.entity.CuentaEntity;
+import com.labrasaviva.repository.CuentaRepository;
 import com.labrasaviva.service.CuentaService;
+import com.labrasaviva.service.EventoAuditoriaService;
 import com.labrasaviva.service.PedidoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.Map;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class CuentaServiceImpl implements CuentaService {
 
+    private final CuentaRepository cuentaRepository;
+    private final CuentaEntityMapper cuentaMapper;
     private final PedidoService pedidoService;
-    private final List<Cuenta> cuentas = new ArrayList<>();
-    private final AtomicLong cuentaCounter = new AtomicLong(1);
+    private final EventoAuditoriaService eventoAuditoriaService;
 
     @Override
+    @Transactional
     public Cuenta abrirCuenta(Long idMesa) {
         // RN-03: Una mesa solo puede tener una cuenta abierta a la vez
-        Optional<Cuenta> cuentaActiva = buscarCuentaActiva(idMesa);
-        if (cuentaActiva.isPresent()) {
+        if (cuentaRepository.existsByIdMesaAndEstado(idMesa, EstadoCuenta.ABIERTA)) {
             throw new MesaOcupadaException("La mesa " + idMesa + " ya tiene una cuenta ABIERTA.");
         }
 
-        Cuenta nuevaCuenta = new Cuenta();
-        nuevaCuenta.setId(cuentaCounter.getAndIncrement());
-        nuevaCuenta.setIdMesa(idMesa);
-        nuevaCuenta.setEstado(EstadoCuenta.ABIERTA);
-        nuevaCuenta.setFechaApertura(LocalDateTime.now());
-        nuevaCuenta.setTotal(0.0);
-        
-        cuentas.add(nuevaCuenta);
-        log.info("Cuenta {} abierta para la mesa {}", nuevaCuenta.getId(), idMesa);
-        return nuevaCuenta;
+        CuentaEntity entity = CuentaEntity.builder()
+                .idMesa(idMesa)
+                .estado(EstadoCuenta.ABIERTA)
+                .fechaApertura(LocalDateTime.now())
+                .total(0.0)
+                .build();
+
+        CuentaEntity guardado = cuentaRepository.save(entity);
+        log.info("Cuenta {} abierta para la mesa {} guardada en BD", guardado.getId(), idMesa);
+
+        eventoAuditoriaService.registrarEvento(
+                "CUENTA_ABIERTA",
+                "Cuenta",
+                guardado.getId(),
+                "Cuenta abierta para la mesa " + idMesa,
+                "MESERO",
+                Map.of("idMesa", idMesa)
+        );
+
+        return cuentaMapper.toDomain(guardado);
     }
 
     @Override
     public Cuenta obtenerCuentaActiva(Long idMesa) {
-        return buscarCuentaActiva(idMesa)
+        return cuentaRepository.findByIdMesaAndEstado(idMesa, EstadoCuenta.ABIERTA)
+                .map(cuentaMapper::toDomain)
                 .orElseThrow(() -> new CuentaNoEncontradaException("No hay una cuenta activa para la mesa " + idMesa));
     }
 
     @Override
+    @Transactional
     public Cuenta cerrarCuenta(Long idMesa, MedioPago medioPago, Double montoRecibido) {
-        Cuenta cuenta = obtenerCuentaActiva(idMesa);
-        
+        CuentaEntity cuenta = cuentaRepository.findByIdMesaAndEstado(idMesa, EstadoCuenta.ABIERTA)
+                .orElseThrow(() -> new CuentaNoEncontradaException("No hay una cuenta activa para la mesa " + idMesa));
+
         List<Pedido> pedidos = pedidoService.obtenerPedidosPorMesa(idMesa);
-        
+
         // RN-09: Validar que todos los pedidos estén ENTREGADOS
         boolean hayPedidosPendientes = pedidos.stream()
                 .anyMatch(p -> p.getEstado() != EstadoPedido.ENTREGADO);
-        
+
         if (hayPedidosPendientes) {
             throw new PedidosNoEntregadosException("No se puede cerrar la cuenta. Hay pedidos que no han sido entregados.");
         }
@@ -83,15 +99,19 @@ public class CuentaServiceImpl implements CuentaService {
         }
 
         cuenta.setEstado(EstadoCuenta.CERRADA);
-        
-        log.info("Cuenta {} cerrada con éxito. Total pagado: {} mediante {}", cuenta.getId(), totalCalculado, medioPago);
-        
-        return cuenta;
-    }
+        CuentaEntity guardado = cuentaRepository.save(cuenta);
 
-    private Optional<Cuenta> buscarCuentaActiva(Long idMesa) {
-        return cuentas.stream()
-                .filter(c -> c.getIdMesa().equals(idMesa) && c.getEstado() == EstadoCuenta.ABIERTA)
-                .findFirst();
+        log.info("Cuenta {} cerrada con éxito en BD. Total pagado: {} mediante {}", guardado.getId(), totalCalculado, medioPago);
+
+        eventoAuditoriaService.registrarEvento(
+                "CUENTA_CERRADA",
+                "Cuenta",
+                guardado.getId(),
+                "Cuenta cerrada y pagada para mesa " + idMesa,
+                "CAJERO",
+                Map.of("total", totalCalculado, "medioPago", medioPago != null ? medioPago.name() : "NO_ESPECIFICADO", "montoRecibido", montoRecibido)
+        );
+
+        return cuentaMapper.toDomain(guardado);
     }
 }
