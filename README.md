@@ -113,3 +113,31 @@ Se implemento una suite de pruebas unitarias automatizadas con JUnit 5 y Mockito
 - Pruebas para casos de exito donde todas las condiciones de negocio se satisfacen.
 - Pruebas para flujos de error y casos borde, verificando que se lancen las excepciones esperadas al infringir reglas de negocio (nombres duplicados, cortes sin termino, pedidos no entregados al cerrar cuenta, cuentas duplicadas en mesa, traslapes de reservas y vehiculos ya ingresados).
 - Se alcanzo una cobertura completa en los servicios principales con ejecucion exitosa de todas las pruebas en el entorno de construccion.
+
+## Implementacion de Persistencia y Modelo Hibrido
+
+Para esta etapa del proyecto se dio el paso de almacenar la informacion temporalmente en memoria a contar con una persistencia formal y organizada para todo el sistema de La Brasa Viva. Como parte de este diseno, tambien se estructuro una matriz de roles y permisos disponible en la ruta docs/excel/Matriz_Roles_Permisos_La_Brasa_Viva.xlsx. En este documento se especifican claramente las acciones que cada rol del restaurante tiene autorizadas y aquellas que tiene restringidas dentro de la plataforma.
+
+### Razones de la Eleccion de un Modelo Hibrido
+
+El sistema maneja dos tipos de necesidades con caracteristicas y ritmos muy diferentes, lo que motivo el uso conjunto de una base de datos relacional y una base de datos no relacional:
+
+Por un lado, la operacion diaria del restaurante requiere un alto nivel de orden, relaciones definidas y consistencia inmediata. Elementos como la carta de platos, las comandas asociadas a una mesa, los cobros de las cuentas, las reservas de turnos y el control de parqueadero dependen unos de otros. Para este proposito se opto por una solucion relacional basada en SQL con H2 y Spring Data JPA, garantizando integridad en cada transaccion y facilitando consultas ordenadas.
+
+Por otro lado, el registro de auditoria y seguimiento historico responde a otra dinamica. Cada vez que ocurre un evento importante en el restaurante, se guarda una constancia con detalles que pueden variar segun la accion realizada. Para no sobrecargar la base de datos principal ni retrasar las solicitudes de los usuarios, estos registros se almacenan en una base de datos documental con MongoDB en la nube. Esta eleccion permite guardar documentos flexibles y realizar inserciones veloces de manera secundaria sin interrumpir la operacion del restaurante.
+
+### Modificaciones Realizadas en el Codigo
+
+A nivel de aplicacion, el paso a la persistencia formal implicó ajustes generales en la arquitectura interna:
+
+Se incorporaron las dependencias y configuraciones necesarias para conectar ambos motores de persistencia y habilitar herramientas visuales de consulta como la consola de H2.
+
+Se crearon clases de entidad independientes para representar las tablas y documentos en base de datos. Esto permitio mantener el modelo de dominio original limpio y protegido, sin mezclarlo con anotaciones o configuraciones propias de la persistencia.
+
+Se crearon componentes de mapeo encargados de traducir la informacion entre las entidades de base de datos y los objetos de negocio, evitando el traspaso manual de campos.
+
+Se sustituyeron las listas y estructuras en memoria en los servicios por repositorios especializados de lectura y escritura. Ademas, las operaciones que modifican varios registros a la vez fueron protegidas bajo manejo de transacciones.
+
+El modulo de auditoria se integro con los servicios principales para emitir eventos en segundo plano tras cada operacion relevante, asegurando que un inconveniente temporal en la conexion externa no detenga el funcionamiento del restaurante.
+
+Por ultimo, la suite de pruebas unitarias se actualizo para incorporar la simulacion de repositorios y convertidores, logrando que todas las pruebas continuen validando la logica de negocio de forma rapida y confiable.
