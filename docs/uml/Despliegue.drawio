@@ -1,0 +1,150 @@
+<mxGraphModel dx="1653" dy="949" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+    <mxCell id="title" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontColor=#2C3E50;" value="&lt;b style=&quot;font-size: 18px;&quot;&gt;DIAGRAMA DE DESPLIEGUE EN LA NUBE — RESTAURANTE LA BRASA VIVA&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 13px; color: #555555;&quot;&gt;Topología de Integración Continua (CI/CD) y Ambientes Cloud (Azure QA &amp;amp; PROD)&lt;/span&gt;" vertex="1">
+      <mxGeometry height="40" width="850" x="40" y="20" as="geometry" />
+    </mxCell>
+    <mxCell id="node_dev" parent="1" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.08;darkOpacity2=0.15;size=12;fillColor=#F5F5F5;strokeColor=#666666;fontColor=#333333;align=center;verticalAlign=top;spacingTop=6;" value="«device»&#xa;&lt;b&gt;Estación Desarrollador&lt;/b&gt;&#xa;[Entorno Local]" vertex="1">
+      <mxGeometry height="110" width="230" x="40" y="97" as="geometry" />
+    </mxCell>
+    <mxCell id="art_dev_code" parent="1" style="html=1;whiteSpace=wrap;shape=note;size=12;fillColor=#FFFFFF;strokeColor=#999999;fontColor=#333333;fontSize=11;verticalAlign=middle;align=center;" value="«artifact»&#xa;&lt;b&gt;Código Fuente Local&lt;/b&gt;&#xa;(Spring Boot + Git)" vertex="1">
+      <mxGeometry height="42" width="172.5" x="72.5" y="165" as="geometry" />
+    </mxCell>
+    <mxCell id="node_github" parent="1" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.08;darkOpacity2=0.15;size=12;fillColor=#F8F9FA;strokeColor=#495057;fontColor=#212529;align=center;verticalAlign=top;spacingTop=6;" value="«execution environment»&#xa;&lt;b&gt;GitHub Cloud&lt;/b&gt;&#xa;[VCS Hosting]" vertex="1">
+      <mxGeometry height="110" width="230" x="40" y="260" as="geometry" />
+    </mxCell>
+    <mxCell id="art_github_repo" parent="1" style="html=1;whiteSpace=wrap;shape=note;size=12;fillColor=#FFFFFF;strokeColor=#6C757D;fontColor=#212529;fontSize=11;verticalAlign=middle;align=center;" value="«artifact»&#xa;&lt;b&gt;Repositorio GitHub&lt;/b&gt;&#xa;(branches: develop / main)" vertex="1">
+      <mxGeometry height="40" width="165" x="72.5" y="325" as="geometry" />
+    </mxCell>
+    <mxCell id="node_actions" parent="1" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.08;darkOpacity2=0.15;size=12;fillColor=#FFE6CC;strokeColor=#D79B00;fontColor=#7F4B00;align=center;verticalAlign=top;spacingTop=6;" value="«execution environment»&#xa;&lt;b&gt;GitHub Actions&lt;/b&gt;&#xa;[Servicio CI/CD]" vertex="1">
+      <mxGeometry height="150" width="230" x="40" y="420" as="geometry" />
+    </mxCell>
+    <mxCell id="art_workflow_qa" parent="1" style="html=1;whiteSpace=wrap;shape=note;size=10;fillColor=#FFF2CC;strokeColor=#D6B656;fontColor=#333333;fontSize=10;verticalAlign=middle;align=center;" value="«deployment spec»&#xa;&lt;b&gt;ci-qa.yml&lt;/b&gt;" vertex="1">
+      <mxGeometry height="75" width="95" x="55" y="485" as="geometry" />
+    </mxCell>
+    <mxCell id="art_workflow_prod" parent="1" style="html=1;whiteSpace=wrap;shape=note;size=10;fillColor=#FFF2CC;strokeColor=#D6B656;fontColor=#333333;fontSize=10;verticalAlign=middle;align=center;" value="«deployment spec»&#xa;&lt;b&gt;ci-prod.yml&lt;/b&gt;" vertex="1">
+      <mxGeometry height="75" width="95" x="160" y="487" as="geometry" />
+    </mxCell>
+    <mxCell id="node_dockerhub" parent="1" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.08;darkOpacity2=0.15;size=12;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontColor=#1D4B7A;align=center;verticalAlign=top;spacingTop=6;" value="«execution environment»&#xa;&lt;b&gt;Docker Hub Registry&lt;/b&gt;&#xa;[Container Registry]" vertex="1">
+      <mxGeometry height="150" width="230" x="40" y="655.5" as="geometry" />
+    </mxCell>
+    <mxCell id="art_image_qa" parent="1" style="html=1;whiteSpace=wrap;shape=note;size=10;fillColor=#FFFFFF;strokeColor=#6C8EBF;fontColor=#1D4B7A;fontSize=10;verticalAlign=middle;align=center;" value="«artifact»&#xa;&lt;b&gt;carlossj8/restaurante-api&lt;/b&gt;&#xa;Tag: qa-latest" vertex="1">
+      <mxGeometry height="38" width="200" x="58.75" y="722" as="geometry" />
+    </mxCell>
+    <mxCell id="art_image_prod" parent="1" style="html=1;whiteSpace=wrap;shape=note;size=10;fillColor=#FFFFFF;strokeColor=#6C8EBF;fontColor=#1D4B7A;fontSize=10;verticalAlign=middle;align=center;" value="«artifact»&#xa;&lt;b&gt;carlossj8/restaurante-api&lt;/b&gt;&#xa;Tag: v1.0.0 (SemVer)" vertex="1">
+      <mxGeometry height="38" width="200" x="55" y="760" as="geometry" />
+    </mxCell>
+    <mxCell id="cloud_azure" parent="1" style="shape=folder;fontStyle=1;tabWidth=260;tabHeight=30;tabPosition=left;html=1;boundedLbl=1;fillColor=none;strokeColor=#0078D4;strokeWidth=2;dashed=1;verticalAlign=top;align=left;spacingLeft=15;spacingTop=8;fontColor=#0078D4;fontSize=14;" value="&lt;b&gt;Microsoft Azure Cloud Platform&lt;/b&gt;" vertex="1">
+      <mxGeometry height="850" width="940" x="320" y="80" as="geometry" />
+    </mxCell>
+    <mxCell id="env_qa" parent="1" style="shape=folder;fontStyle=1;tabWidth=240;tabHeight=25;tabPosition=left;html=1;boundedLbl=1;fillColor=#F4F8FD;strokeColor=#4A90E2;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;fontColor=#1B4F72;fontSize=12;" value="&lt;b&gt;Ambiente QA (Staging / Pruebas)&lt;/b&gt;" vertex="1">
+      <mxGeometry height="360" width="880" x="340" y="150" as="geometry" />
+    </mxCell>
+    <mxCell id="node_app_qa" parent="1" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.08;darkOpacity2=0.15;size=12;fillColor=#D0E1FD;strokeColor=#185ABD;fontColor=#0C2340;align=center;verticalAlign=top;spacingTop=6;" value="«device»&lt;br&gt;&lt;b&gt;Azure App Service (Linux)&lt;/b&gt;&lt;br&gt;restaurante-qa.azurewebsites.net" vertex="1">
+      <mxGeometry height="170" width="270" x="380" y="207" as="geometry" />
+    </mxCell>
+    <mxCell id="art_container_qa" parent="1" style="html=1;whiteSpace=wrap;shape=note;size=12;fillColor=#FFFFFF;strokeColor=#185ABD;fontColor=#0C2340;fontSize=11;verticalAlign=middle;align=center;" value="«artifact»&#xa;&lt;b&gt;restaurante-api:qa-latest&lt;/b&gt;&#xa;(Spring Boot Container / JRE 21)" vertex="1">
+      <mxGeometry height="75" width="220" x="405" y="290" as="geometry" />
+    </mxCell>
+    <mxCell id="node_pg_qa" parent="1" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.08;darkOpacity2=0.15;size=12;fillColor=#E8F0FE;strokeColor=#1A73E8;fontColor=#0D47A1;align=center;verticalAlign=top;spacingTop=6;" value="«device»&lt;br&gt;&lt;b&gt;Azure Database for PostgreSQL&lt;/b&gt;&lt;br&gt;[Instancia QA]" vertex="1">
+      <mxGeometry height="120" width="250" x="790" y="175" as="geometry" />
+    </mxCell>
+    <mxCell id="art_db_pg_qa" parent="1" style="html=1;whiteSpace=wrap;shape=note;size=10;fillColor=#FFFFFF;strokeColor=#1A73E8;fontColor=#0D47A1;fontSize=10;verticalAlign=middle;align=center;" value="«artifact»&#xa;&lt;b&gt;Schema: labrasaviva_qa&lt;/b&gt;&#xa;(Relacional / Transaccional)" vertex="1">
+      <mxGeometry height="42" width="200" x="827" y="253" as="geometry" />
+    </mxCell>
+    <mxCell id="node_mongo_qa" parent="1" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.08;darkOpacity2=0.15;size=12;fillColor=#E8F0FE;strokeColor=#1A73E8;fontColor=#0D47A1;align=center;verticalAlign=top;spacingTop=6;" value="«device»&lt;br&gt;&lt;b&gt;Azure Cosmos DB (Mongo API)&lt;/b&gt;&lt;br&gt;[Instancia QA]" vertex="1">
+      <mxGeometry height="120" width="250" x="720" y="325" as="geometry" />
+    </mxCell>
+    <mxCell id="art_db_mongo_qa" parent="1" style="html=1;whiteSpace=wrap;shape=note;size=10;fillColor=#FFFFFF;strokeColor=#1A73E8;fontColor=#0D47A1;fontSize=10;verticalAlign=middle;align=center;" value="«artifact»&#xa;&lt;b&gt;Database: logs_auditoria_qa&lt;/b&gt;&#xa;(NoSQL / Colecciones)" vertex="1">
+      <mxGeometry height="42" width="200" x="760" y="400" as="geometry" />
+    </mxCell>
+    <mxCell id="env_prod" parent="1" style="shape=folder;fontStyle=1;tabWidth=240;tabHeight=25;tabPosition=left;html=1;boundedLbl=1;fillColor=#F3FAF4;strokeColor=#27AE60;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;fontColor=#145A32;fontSize=12;" value="&lt;b&gt;Ambiente PROD (Producción)&lt;/b&gt;" vertex="1">
+      <mxGeometry height="380" width="880" x="350" y="520" as="geometry" />
+    </mxCell>
+    <mxCell id="node_app_prod" parent="1" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.08;darkOpacity2=0.15;size=12;fillColor=#D4EFDF;strokeColor=#196F3D;fontColor=#0E3A1E;align=center;verticalAlign=top;spacingTop=6;" value="«device»&lt;br&gt;&lt;b&gt;Azure App Service (Linux)&lt;/b&gt;&lt;br&gt;restaurante-prod.azurewebsites.net" vertex="1">
+      <mxGeometry height="170" width="270" x="414" y="610" as="geometry" />
+    </mxCell>
+    <mxCell id="art_container_prod" parent="1" style="html=1;whiteSpace=wrap;shape=note;size=12;fillColor=#FFFFFF;strokeColor=#196F3D;fontColor=#0E3A1E;fontSize=11;verticalAlign=middle;align=center;" value="«artifact»&#xa;&lt;b&gt;restaurante-api:v1.0.0&lt;/b&gt;&#xa;(Spring Boot Container / JRE 21)" vertex="1">
+      <mxGeometry height="75" width="220" x="405" y="693" as="geometry" />
+    </mxCell>
+    <mxCell id="node_pg_prod" parent="1" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.08;darkOpacity2=0.15;size=12;fillColor=#E8F8F5;strokeColor=#117864;fontColor=#0B4F42;align=center;verticalAlign=top;spacingTop=6;" value="«device»&lt;br&gt;&lt;b&gt;Azure Database for PostgreSQL&lt;/b&gt;&lt;br&gt;[Instancia Producción]" vertex="1">
+      <mxGeometry height="120" width="250" x="760" y="570" as="geometry" />
+    </mxCell>
+    <mxCell id="art_db_pg_prod" parent="1" style="html=1;whiteSpace=wrap;shape=note;size=10;fillColor=#FFFFFF;strokeColor=#117864;fontColor=#0B4F42;fontSize=10;verticalAlign=middle;align=center;" value="«artifact»&#xa;&lt;b&gt;Schema: labrasaviva_prod&lt;/b&gt;&#xa;(Relacional / Alta Disponibilidad)" vertex="1">
+      <mxGeometry height="42" width="200" x="795" y="643" as="geometry" />
+    </mxCell>
+    <mxCell id="node_mongo_prod" parent="1" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.08;darkOpacity2=0.15;size=12;fillColor=#E8F8F5;strokeColor=#117864;fontColor=#0B4F42;align=center;verticalAlign=top;spacingTop=6;" value="«device»&lt;br&gt;&lt;b&gt;Azure Cosmos DB (Mongo API)&lt;/b&gt;&lt;br&gt;[Instancia Producción]" vertex="1">
+      <mxGeometry height="120" width="250" x="777" y="740" as="geometry" />
+    </mxCell>
+    <mxCell id="art_db_mongo_prod" parent="1" style="html=1;whiteSpace=wrap;shape=note;size=10;fillColor=#FFFFFF;strokeColor=#117864;fontColor=#0B4F42;fontSize=10;verticalAlign=middle;align=center;" value="«artifact»&#xa;&lt;b&gt;Database: logs_auditoria_prod&lt;/b&gt;&#xa;(NoSQL / Georreplicado)" vertex="1">
+      <mxGeometry height="42" width="200" x="810" y="818" as="geometry" />
+    </mxCell>
+    <mxCell id="node_clients" parent="1" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.08;darkOpacity2=0.15;size=12;fillColor=#FFF2CC;strokeColor=#D6B656;fontColor=#665100;align=center;verticalAlign=top;spacingTop=6;" value="«device»&#xa;&lt;b&gt;Clientes / Navegadores&lt;/b&gt;&#xa;[Dispositivos de Usuario]" vertex="1">
+      <mxGeometry height="160" width="240" x="1330" y="415" as="geometry" />
+    </mxCell>
+    <mxCell id="art_client_web" parent="1" style="html=1;whiteSpace=wrap;shape=note;size=10;fillColor=#FFFFFF;strokeColor=#D6B656;fontColor=#665100;fontSize=10;verticalAlign=middle;align=center;" value="«artifact»&#xa;&lt;b&gt;Frontend Web / Comensales&lt;/b&gt;&#xa;React / Navegador Móvil" vertex="1">
+      <mxGeometry height="40" width="200" x="1350" y="485" as="geometry" />
+    </mxCell>
+    <mxCell id="art_client_swagger" parent="1" style="html=1;whiteSpace=wrap;shape=note;size=10;fillColor=#FFFFFF;strokeColor=#D6B656;fontColor=#665100;fontSize=10;verticalAlign=middle;align=center;" value="«artifact»&#xa;&lt;b&gt;Swagger UI / OpenAPI&lt;/b&gt;&#xa;Documentación Interactiva" vertex="1">
+      <mxGeometry height="40" width="200" x="1350" y="530" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_dev_github" edge="1" parent="1" source="node_dev" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#495057;strokeWidth=1.5;fontColor=#212529;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="node_github" value="git push&#xa;[HTTPS]">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_github_actions" edge="1" parent="1" source="node_github" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D79B00;strokeWidth=1.5;fontColor=#7F4B00;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="node_actions" value="webhook trigger&#xa;[push events]">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_actions_dockerhub" edge="1" parent="1" source="node_actions" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1D4B7A;strokeWidth=1.5;fontColor=#1D4B7A;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="node_dockerhub" value="docker push&#xa;[qa-latest / v1.0.0]">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_actions_app_qa" edge="1" parent="1" source="node_actions" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#185ABD;strokeWidth=2;fontColor=#185ABD;fontSize=11;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="node_app_qa" value="Despliegue automático&#xa;[Azure WebApp Deploy]">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="310" y="458" />
+          <mxPoint x="310" y="285" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge_actions_app_prod" edge="1" parent="1" source="node_actions" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#196F3D;strokeWidth=2;fontColor=#196F3D;fontSize=11;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="node_app_prod" value="Aprobación manual + Despliegue&#xa;[Azure WebApp Deploy]">
+      <mxGeometry relative="1" x="0.0277" as="geometry">
+        <mxPoint y="1" as="offset" />
+        <Array as="points">
+          <mxPoint x="340" y="532.5" />
+          <mxPoint x="340" y="690" />
+          <mxPoint x="414" y="690" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge_qa_pg" edge="1" parent="1" source="node_app_qa" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1A73E8;strokeWidth=1.5;fontColor=#0D47A1;fontSize=11;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="node_pg_qa" value="JDBC con SSL&#xa;[Puerto 5432]">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_qa_mongo" edge="1" parent="1" source="node_app_qa" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1A73E8;strokeWidth=1.5;fontColor=#0D47A1;fontSize=11;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="node_mongo_qa" value="Driver Mongo con SSL&#xa;[Puerto 10255 / 27017]">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_prod_pg" edge="1" parent="1" source="node_app_prod" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#117864;strokeWidth=1.5;fontColor=#0B4F42;fontSize=11;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="node_pg_prod" value="JDBC con SSL">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_prod_mongo" edge="1" parent="1" source="node_app_prod" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#117864;strokeWidth=1.5;fontColor=#0B4F42;fontSize=11;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="node_mongo_prod" value="">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="edge_client_qa" edge="1" parent="1" source="node_clients" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D6B656;strokeWidth=1.5;fontColor=#665100;fontSize=11;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=0.85;entryY=0;entryDx=0;entryDy=0;" target="node_app_qa" value="HTTPS (443)&#xa;[Pruebas / Swagger UI]">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1290" y="455" />
+          <mxPoint x="1290" y="140" />
+          <mxPoint x="610" y="140" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge_client_prod" edge="1" parent="1" source="node_clients" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#27AE60;strokeWidth=2;fontColor=#145A32;fontSize=11;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=0.85;entryY=1;entryDx=0;entryDy=0;" target="node_app_prod" value="[Tráfico Productivo]">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1290" y="535" />
+          <mxPoint x="1290" y="880" />
+          <mxPoint x="609.5" y="880" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+  </root>
+</mxGraphModel>
