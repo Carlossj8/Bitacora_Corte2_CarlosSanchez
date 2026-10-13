@@ -46,40 +46,12 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - name: Verificar credenciales o simular despliegue PROD
-        run: |
-          if [ -z "${{ secrets.AZURE_CREDENTIALS }}" ]; then
-            echo "Azure credentials no configuradas. Simulando despliegue de Producción con imagen de release..."
-            echo "Versión productiva: ${{ needs.build-prod.outputs.version }}"
-            echo "Imagen lista para producción: ${{ env.IMAGE_NAME }}:${{ needs.build-prod.outputs.version }}"
-          else
-            echo "Credenciales de Azure detectadas. Procediendo con el despliegue..."
-          fi
-
-      - name: Login a Azure
-        if: ${{ secrets.AZURE_CREDENTIALS != '' }}
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
       - name: Desplegar en Azure Web App (PROD)
-        if: ${{ secrets.AZURE_CREDENTIALS != '' }}
         uses: azure/webapps-deploy@v3
         with:
-          app-name: ${{ secrets.AZURE_WEBAPP_NAME_PROD }}
+          app-name: 'restaurante-qa-carlossj'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           images: ${{ env.IMAGE_NAME }}:${{ needs.build-prod.outputs.version }}
-
-      - name: Configurar variables PROD
-        if: ${{ secrets.AZURE_CREDENTIALS != '' }}
-        uses: azure/appservice-settings@v1
-        with:
-          app-name: ${{ secrets.AZURE_WEBAPP_NAME_PROD }}
-          app-settings-json: |
-            [
-              {"name": "SPRING_PROFILES_ACTIVE", "value": "docker"},
-              {"name": "JWT_SECRET", "value": "${{ secrets.JWT_SECRET_PROD }}"},
-              {"name": "DB_PASSWORD", "value": "${{ secrets.DB_PASSWORD_PROD }}"}
-            ]
 
   notify:
     name: 📣 Notificación
@@ -90,4 +62,4 @@ jobs:
         run: |
           echo "PROD desplegado exitosamente"
           echo "Version: ${{ github.ref_name }}"
-          echo "URL: https://${{ secrets.AZURE_WEBAPP_NAME_PROD }}.azurewebsites.net"
+          echo "URL: https://restaurante-qa-carlossj.azurewebsites.net"

@@ -273,8 +273,8 @@ Para el correcto funcionamiento de los workflows se deben registrar los siguient
 
 ### URLs de Despliegue en la Nube
 
-- Documentacion Swagger QA: `https://restaurante-qa.azurewebsites.net/swagger-ui/index.html`
-- Documentacion Swagger PROD: `https://restaurante-prod.azurewebsites.net/swagger-ui/index.html`
+- Documentacion Swagger QA: `https://restaurante-qa-carlossj.azurewebsites.net/swagger-ui/index.html`
+- Documentacion Swagger PROD: `https://restaurante-qa-carlossj.azurewebsites.net/swagger-ui/index.html`
 
 ### Evidencias de CI/CD y Despliegue
 

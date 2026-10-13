@@ -40,6 +40,7 @@ jobs:
         with:
           name: coverage-report
           path: target/site/jacoco/
+          if-no-files-found: ignore
 
   build-and-push:
     name: 🐳 Build imagen Docker
@@ -80,36 +81,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: qa
     steps:
-      - name: Verificar credenciales o simular despliegue
-        run: |
-          if [ -z "${{ secrets.AZURE_CREDENTIALS }}" ]; then
-            echo "Azure credentials no configuradas. Simulando despliegue exitoso en QA..."
-            echo "Imagen desplegada: ${{ env.IMAGE_NAME }}:qa-latest"
-          else
-            echo "Credenciales de Azure detectadas. Procediendo con el despliegue..."
-          fi
-
-      - name: Login a Azure
-        if: ${{ secrets.AZURE_CREDENTIALS != '' }}
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
       - name: Desplegar en Azure Web App (QA)
-        if: ${{ secrets.AZURE_CREDENTIALS != '' }}
         uses: azure/webapps-deploy@v3
         with:
-          app-name: ${{ secrets.AZURE_WEBAPP_NAME_QA }}
+          app-name: 'restaurante-qa-carlossj'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           images: ${{ env.IMAGE_NAME }}:qa-latest
-
-      - name: Configurar variables de entorno en Azure QA
-        if: ${{ secrets.AZURE_CREDENTIALS != '' }}
-        uses: azure/appservice-settings@v1
-        with:
-          app-name: ${{ secrets.AZURE_WEBAPP_NAME_QA }}
-          app-settings-json: |
-            [
-              {"name": "SPRING_PROFILES_ACTIVE", "value": "docker"},
-              {"name": "JWT_SECRET", "value": "${{ secrets.JWT_SECRET_QA }}"},
-              {"name": "DB_PASSWORD", "value": "${{ secrets.DB_PASSWORD_QA }}"}
-            ]
