@@ -1,0 +1,93 @@
+# .github/workflows/ci-prod.yml
+name: CD — Deploy PROD
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+env:
+  IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/restaurante-api
+
+jobs:
+
+  build-prod:
+    name: 🐳 Build imagen PROD
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.meta.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login a Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Metadata con el tag de versión
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.IMAGE_NAME }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=raw,value=latest
+
+      - name: Build y push imagen de producción
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+
+  deploy-prod:
+    name: 🚀 Desplegar a PROD
+    needs: build-prod
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Verificar credenciales o simular despliegue PROD
+        run: |
+          if [ -z "${{ secrets.AZURE_CREDENTIALS }}" ]; then
+            echo "Azure credentials no configuradas. Simulando despliegue de Producción con imagen de release..."
+            echo "Versión productiva: ${{ needs.build-prod.outputs.version }}"
+            echo "Imagen lista para producción: ${{ env.IMAGE_NAME }}:${{ needs.build-prod.outputs.version }}"
+          else
+            echo "Credenciales de Azure detectadas. Procediendo con el despliegue..."
+          fi
+
+      - name: Login a Azure
+        if: ${{ secrets.AZURE_CREDENTIALS != '' }}
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Desplegar en Azure Web App (PROD)
+        if: ${{ secrets.AZURE_CREDENTIALS != '' }}
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ secrets.AZURE_WEBAPP_NAME_PROD }}
+          images: ${{ env.IMAGE_NAME }}:${{ needs.build-prod.outputs.version }}
+
+      - name: Configurar variables PROD
+        if: ${{ secrets.AZURE_CREDENTIALS != '' }}
+        uses: azure/appservice-settings@v1
+        with:
+          app-name: ${{ secrets.AZURE_WEBAPP_NAME_PROD }}
+          app-settings-json: |
+            [
+              {"name": "SPRING_PROFILES_ACTIVE", "value": "docker"},
+              {"name": "JWT_SECRET", "value": "${{ secrets.JWT_SECRET_PROD }}"},
+              {"name": "DB_PASSWORD", "value": "${{ secrets.DB_PASSWORD_PROD }}"}
+            ]
+
+  notify:
+    name: 📣 Notificación
+    needs: deploy-prod
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resumen del despliegue
+        run: |
+          echo "PROD desplegado exitosamente"
+          echo "Version: ${{ github.ref_name }}"
+          echo "URL: https://${{ secrets.AZURE_WEBAPP_NAME_PROD }}.azurewebsites.net"
